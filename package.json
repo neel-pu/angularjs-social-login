@@ -1,0 +1,94 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "angularjs-social-login@git+https://github.com/neel-pu/angularjs-social-login.git",
+        "scope": null,
+        "escapedName": "angularjs-social-login",
+        "name": "angularjs-social-login",
+        "rawSpec": "git+https://github.com/neel-pu/angularjs-social-login.git",
+        "spec": "git+https://github.com/neel-pu/angularjs-social-login.git",
+        "type": "hosted",
+        "hosted": {
+          "type": "github",
+          "ssh": "git@github.com:neel-pu/angularjs-social-login.git",
+          "sshUrl": "git+ssh://git@github.com/neel-pu/angularjs-social-login.git",
+          "httpsUrl": "git+https://github.com/neel-pu/angularjs-social-login.git",
+          "gitUrl": "git://github.com/neel-pu/angularjs-social-login.git",
+          "shortcut": "github:neel-pu/angularjs-social-login",
+          "directUrl": "https://raw.githubusercontent.com/neel-pu/angularjs-social-login/master/package.json"
+        }
+      },
+      "/home/neel/mount/projects/Folio/www/folio"
+    ]
+  ],
+  "_from": "git+https://github.com/neel-pu/angularjs-social-login.git",
+  "_id": "angularjs-social-login@2.6.1",
+  "_inCache": true,
+  "_location": "/angularjs-social-login",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angularjs-social-login@git+https://github.com/neel-pu/angularjs-social-login.git",
+    "scope": null,
+    "escapedName": "angularjs-social-login",
+    "name": "angularjs-social-login",
+    "rawSpec": "git+https://github.com/neel-pu/angularjs-social-login.git",
+    "spec": "git+https://github.com/neel-pu/angularjs-social-login.git",
+    "type": "hosted",
+    "hosted": {
+      "type": "github",
+      "ssh": "git@github.com:neel-pu/angularjs-social-login.git",
+      "sshUrl": "git+ssh://git@github.com/neel-pu/angularjs-social-login.git",
+      "httpsUrl": "git+https://github.com/neel-pu/angularjs-social-login.git",
+      "gitUrl": "git://github.com/neel-pu/angularjs-social-login.git",
+      "shortcut": "github:neel-pu/angularjs-social-login",
+      "directUrl": "https://raw.githubusercontent.com/neel-pu/angularjs-social-login/master/package.json"
+    }
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+https://github.com/neel-pu/angularjs-social-login.git#d3cc3c309baf082a43626878c3a06f6aef47aa0a",
+  "_shasum": "0dcdb51221565debbbe8623eb7ebba0275b9ad5d",
+  "_shrinkwrap": null,
+  "_spec": "angularjs-social-login@git+https://github.com/neel-pu/angularjs-social-login.git",
+  "_where": "/home/neel/mount/projects/Folio/www/folio",
+  "author": {
+    "name": "Heresy Infotech Private Limited"
+  },
+  "bugs": {
+    "url": "https://github.com/heresy/angularjs-social-login/issues"
+  },
+  "contributors": [
+    {
+      "name": "Srinivas K",
+      "email": "kpsrinivas@heresy.in"
+    },
+    {
+      "name": "Jayaram Kurapati",
+      "email": "reachme@jayaramk.in",
+      "url": "https://www.jayaramk.in"
+    }
+  ],
+  "dependencies": {
+    "angular": "~1.6.1"
+  },
+  "description": "Social Authentication for AngularJS application.",
+  "devDependencies": {},
+  "gitHead": "d3cc3c309baf082a43626878c3a06f6aef47aa0a",
+  "homepage": "https://github.com/heresy/angularjs-social-login#readme",
+  "license": "MIT",
+  "main": "angularjs-social-login.js",
+  "name": "angularjs-social-login",
+  "optionalDependencies": {},
+  "readme": "# AngularJS Social Login (socialLogin)\nAngularJS Social Login Module is a simple client side authentication module which helps to authenticate your application using Google/Facebook/LinkedIN. It doesn't maintain any session, session between client application and server should be maintained by yourself after receiving user details from the provider.\n\nSupported sites:\n- Google\n- Facebook\n- LinkedIN\n\n## Installation\n\n### via npm\n\n```shell\nnpm install angularjs-social-login --save\n```\n\n### via bower\n\n```shell\nbower install angularjs-social-login --save\n```\n\n### configure installation\n\nInclude JS files:\n\n```html\n<script src=\"bower_components/angularjs-social-login/angularjs-social-login.js\"></script>\n```\n\nThen include `socialLogin` as a dependency for your app:\n\n```javascript\nangular.module('myApp', ['socialLogin']);\n```\n\n## Configuration\n\n### Example\n\n```javascript\napp.config(function(socialProvider){\n\tsocialProvider.setGoogleKey(\"YOUR GOOGLE CLIENT ID\");\n  socialProvider.setLinkedInKey(\"YOUR LINKEDIN CLIENT ID\");\n  socialProvider.setFbKey({appId: \"YOUR FACEBOOK APP ID\", apiVersion: \"API VERSION\"});\n});\n```\n\n## Usage\nThere are total three directives for handling Google, Facebook, LinkedIn authentication.\n- fbLogin (For Facebook)\n- gLogin (For Google)\n- linkedIn (For LinkedIn)\n\n### Methods\n\n- `socialProvider.setGoogleKey(\"YOUR GOOGLE CLIENT ID\")`\n- `socialProvider.setLinkedInKey(\"YOUR LINKEDIN CLIENT ID\")`\n- `socialProvider.setFbKey(\"YOUR FACEBOOK APP ID\")`\n- `$rootScope.$on('event:social-sign-in-success', function(event, userDetails){})` \n   Braodcast event which will be triggered after successful authentication. `userDetails` is an `Object` consists of `{name: <user_name>, email: <user_email>, imageUrl: <image_url>, uid: <UID by social vendor>, provider: <Google/Facebook/LinkedIN>, token: < accessToken for Facebook & google, no token for linkedIN>}, idToken: < google idToken >` \n- `socialLoginService.logout()`\n   For logout\n- `$rootScope.$on('event:social-sign-out-success', function(event, logoutStatus){})`\n   Braodcast event which will be triggered after successful logout.\n\n### Example\n```html\n<button g-login type=\"button\">Google Login</button>\n<button linked-in type=\"button\">LinkedIn Login</button>\n<button fb-login type=\"button\">facebook Login</button>\n```\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/heresy/angularjs-social-login.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.6.1"
+}
