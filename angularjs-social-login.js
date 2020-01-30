@@ -138,18 +138,22 @@ socialLogin.directive("gLogin", ['$rootScope', 'social', 'socialLoginService',
 						imageUrl: profile.getImageUrl()
 					}
 				}
+
+				var onGoogleLoginComplete = function() {
+					socialLoginService.setProvider("google");
+					$rootScope.$broadcast('event:social-sign-in-success', fetchUserDetails());
+				};
+
 		    	if(typeof(scope.gauth) == "undefined")
 		    		scope.gauth = gapi.auth2.getAuthInstance();
 				if(!scope.gauth.isSignedIn.get()){
 					scope.gauth.signIn().then(function(googleUser){
-						socialLoginService.setProvider("google");
-						$rootScope.$broadcast('event:social-sign-in-success', fetchUserDetails());
+						onGoogleLoginComplete();
 					}, function(err){
 						console.log(err);
 					});
-				}else{
-					socialLoginService.setProvider("google");
-					$rootScope.$broadcast('event:social-sign-in-success', fetchUserDetails());
+				} else {
+					onGoogleLoginComplete();
 				}
 	        	
 	        });
@@ -167,7 +171,7 @@ socialLogin.directive("fbLogin", ['$rootScope', 'social', 'socialLoginService', 
 			ele.on('click', function(){
 				var fetchUserDetails = function(){
 					var deferred = $q.defer();
-					FB.api('/me?fields=email,first_name,last_name', function(res){
+					FB.api('/me?fields=name,email', function(res){
 						if(!res || res.error){
 							deferred.reject('Error occured while fetching user details.');
 						}else{
@@ -175,8 +179,7 @@ socialLogin.directive("fbLogin", ['$rootScope', 'social', 'socialLoginService', 
 								name: res.name, 
 								email: res.email, 
 								uid: res.id, 
-								provider: "facebook", 
-								imageUrl: res.picture.data.url
+								provider: "facebook"
 							});
 						}
 					});
